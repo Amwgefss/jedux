@@ -1,6 +1,6 @@
 # Jedux - Redux architecture for Android
 
-In the best traditions of Redux, Jedux implementation is very small and very flexible.
+In the best traditions of [Redux](https://redux.js.org), Jedux is a very small and very flexible implementation.
 
 Best used with [Anvil](https://github.com/zserge/anvil), which is React-like
 library for Android.
@@ -16,6 +16,11 @@ dependencies {
 	compile "com.github.trikita:jedux:+"
 }
 ```
+
+## Apps built with Jedux
+
+* [Talalarmo] alarm clock - https://github.com/trikita/talalarmo
+* [Slide] text presentation maker - https://github.com/trikita/slide
 
 ## Example
 
@@ -34,10 +39,10 @@ enum CounterAction {
 		PLUS,
 }
 
-// Create store givinng the reducer and initial state
+// Create store providing reducer and initial state
 private Store<Action<CounterAction, ?>, State> store = new Store(this::reduce, new State(0));
 
-// Reducer: transforms old state into a new one depending on action type and value
+// Reducer: transforms old state into a new one depending on the action type and value
 public State reduce(Action<CounterAction, ?> action, State old) {
 		switch (action.type) {
 				case INCREMENT:
@@ -48,21 +53,17 @@ public State reduce(Action<CounterAction, ?> action, State old) {
 		return old;
 }
 
-// Bind state values (e.g in your Anvil view properties)
+// Using Anvil you can bind store variables to some view properties
 textView(() -> {
 	text("Count: " + store.getState().count);
 });
 
-// Submit action (e.g. from your button click listeners
+// Submit an action (e.g. from your event listeners)
 button(() -> {
-	onClick(v -> {
-		store.dispatch(new Action<>(CounterAction.INCREMENT));
-	});
+	onClick(v -> store.dispatch(new Action<>(CounterAction.INCREMENT)));
 });
 button(() -> {
-	onClick(v -> {
-		store.dispatch(new Action<>(CounterAction.PLUS, 10));
-	});
+	onClick(v -> store.dispatch(new Action<>(CounterAction.PLUS, 10)));
 });
 ```
 
@@ -70,13 +71,13 @@ button(() -> {
 
 trikita.jedux.Store:
 
-* new Store(reducer, initialState, middlewares...) - create new store
-* store.dispatch(action) - sends action message to the store, returns new state
-* store.getState() - returns current state
+* `new Store(reducer, initialState, middlewares...)` - create new store
+* `store.dispatch(action)` - sends action message to the store, returns new state
+* `store.getState()` - returns current state
 
 trkita.jedux.Action (you are free to use your own action types!):
 
-* new Action<>(type, value) - creates an action with given type (enum) and value (any kind of object).
+* `new Action<>(type, value)` - creates an action with given type (enum) and value (any kind of object).
 
 trikita.jedix.Store.Middleware - implenent this interface to add custom
 middleware (e.g. to handle actions with side effects or talk with your
@@ -97,9 +98,9 @@ public class Logger<A, S> implements Store.Middleware<A, S> {
 }
 ```
 
+To keep you state immutable consider using [Immutables](https://immutables.github.io) or [Dexx](https://github.com/andrewoma/dexx).
+
 ## License
 
 Code is distributed under MIT license, feel free to use it in your proprietary
 projects as well.
-
-
