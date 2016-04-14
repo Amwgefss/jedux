@@ -98,7 +98,7 @@ public class Logger<A, S> implements Store.Middleware<A, S> {
 }
 ```
 
-To keep you state immutable consider using [Immutables](https://immutables.github.io) or [Dexx](https://github.com/andrewoma/dexx).
+To keep the state immutable consider using [Immutables](https://immutables.github.io) or [Dexx](https://github.com/andrewoma/dexx).
 
 ## License
 
