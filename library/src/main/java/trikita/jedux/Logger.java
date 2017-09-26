@@ -2,6 +2,9 @@ package trikita.jedux;
 
 import android.util.Log;
 
+/**
+ * Sample middleware which log all actions and state changes in store.
+ */
 public class Logger<A, S> implements Store.Middleware<A, S> {
 
     private final String tag;
