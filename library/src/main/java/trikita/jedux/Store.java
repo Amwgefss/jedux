@@ -104,7 +104,7 @@ public final class Store<A, S> {
      * Constructs new store
      * @param reducer Root reducer
      * @param state Initial state
-     * @param ...middlewares Middlewares to register in store
+     * @param middlewares Middlewares to register in store
      */
     public Store(Reducer<A, S> reducer, S state, Middleware<A, S> ...middlewares) {
         this.reducer = reducer;
